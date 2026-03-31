@@ -1,6 +1,12 @@
 # irrationalsignals
 
-Python SDK for the [IrrationalSignals](https://irrationalsignals.com) stock-signal API.
+**Know what to trade before the market does.**
+
+Statistical models scan hundreds of US equities every hour and surface the ones with a measurable edge. Every signal includes a direction, historical win rate (70%+ average), entry price, exit target, and expected return — delivered via API so you can automate it or use it however you want.
+
+IrrationalSignals covers Technology, Consumer Cyclical, and Communication Services — three sectors where the models have demonstrated statistical edge. Signals update 6 times per trading day during market hours (10:50 AM to 3:50 PM ET).
+
+This is the official Python SDK. Get started in under a minute.
 
 ```
 pip install irrationalsignals
@@ -108,5 +114,8 @@ except APIError as e:
 
 ## Links
 
+- [Website](https://irrationalsignals.com)
+- [Full API documentation](https://irrationalsignals.com/docs)
+- [Pricing](https://irrationalsignals.com/pricing)
 - [Dashboard & API keys](https://irrationalsignals.com/dashboard)
-- [Full documentation](https://irrationalsignals.com/docs)
+- [Get a free API key](https://irrationalsignals.com/register)
