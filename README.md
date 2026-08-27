@@ -2,7 +2,7 @@
 
 > **⚠️ Discontinued — this project is no longer maintained.**
 >
-> IrrationalSignals was wound down in 2026. The API at `api.irrationalsignals.com` is
+> IrrationalSignals was wound down in May 2026. The API at `api.irrationalsignals.com` is
 > offline, so this SDK no longer functions against a live service. The repository stays
 > public as a portfolio reference. No support, no further releases.
 

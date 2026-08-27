@@ -15,7 +15,7 @@ class Client:
     """Thin wrapper around GET /v1/signals.
 
     .. deprecated::
-        The IrrationalSignals service was discontinued in 2026 and the API is
+        The IrrationalSignals service was discontinued in May 2026 and the API is
         offline. Instantiating this client emits a DeprecationWarning; requests
         will fail with a connection error.
 
@@ -36,7 +36,7 @@ class Client:
         timeout: float = 30,
     ):
         warnings.warn(
-            "IrrationalSignals was discontinued in 2026 and its API is offline. "
+            "IrrationalSignals was discontinued in May 2026 and its API is offline. "
             "This SDK is unmaintained and requests will fail.",
             DeprecationWarning,
             stacklevel=2,

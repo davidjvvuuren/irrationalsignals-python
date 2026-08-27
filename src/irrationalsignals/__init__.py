@@ -1,6 +1,6 @@
 """IrrationalSignals Python SDK — thin wrapper around the signals API.
 
-DEPRECATED: IrrationalSignals was wound down in 2026 and the API is offline.
+DEPRECATED: IrrationalSignals was wound down in May 2026 and the API is offline.
 This package is no longer maintained and will not function against a live
 service. It remains published for reference only.
 """
