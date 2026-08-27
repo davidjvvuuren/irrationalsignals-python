@@ -1,18 +1,29 @@
 # irrationalsignals
 
-**Know what to trade before the market does.**
+> **⚠️ Discontinued — this project is no longer maintained.**
+>
+> IrrationalSignals was wound down in 2026. The API at `api.irrationalsignals.com` is
+> offline, so this SDK no longer functions against a live service. The repository stays
+> public as a portfolio reference. No support, no further releases.
 
-Statistical models scan hundreds of US equities every hour and surface the ones with a measurable edge. Every signal includes a direction, historical win rate (70%+ average), entry price, exit target, and expected return — delivered via API so you can automate it or use it however you want.
+## What this was
 
-IrrationalSignals covers Technology, Consumer Cyclical, and Communication Services — three sectors where the models have demonstrated statistical edge. Signals update 6 times per trading day during market hours (10:50 AM to 3:50 PM ET).
+IrrationalSignals was a stock-signal service. Statistical models scanned hundreds of US
+equities every hour and surfaced the ones showing a measurable edge. Each signal carried a
+direction, a historical win rate, an entry price, an exit target, and an expected return,
+delivered over a JSON API so subscribers could automate against it.
 
-This is the official Python SDK. Get started in under a minute.
+Coverage was limited to Technology, Consumer Cyclical, and Communication Services — the
+three sectors where the models held up under backtesting. Signals refreshed six times per
+trading day during market hours (10:50 AM to 3:50 PM ET).
 
-```
-pip install irrationalsignals
-```
+This repository is the official Python SDK: a thin, dependency-light wrapper over a single
+endpoint (`GET /v1/signals`), with typed response models and mapped error classes.
 
-## Quick Start
+## Usage (historical)
+
+The examples below document how the SDK worked while the service was running. They will
+now fail with a connection error.
 
 ```python
 from irrationalsignals import Client
@@ -24,19 +35,19 @@ for signal in response.signals:
     print(f"{signal.symbol} {signal.direction} (win rate: {signal.win_rate:.0%})")
 ```
 
-## Filter by Sector
+Filtering by sector:
 
 ```python
 response = client.get_signals(sector="Technology")
 ```
 
-## Historical Hour (Max Tier)
+Same-day historical hour (Max tier):
 
 ```python
 response = client.get_signals(hour=14)  # 2 PM ET signals
 ```
 
-## Error Handling
+Error handling:
 
 ```python
 from irrationalsignals import Client, AuthError, RateLimitError, APIError
@@ -61,8 +72,8 @@ except APIError as e:
 |-------|------|-------------|
 | `market_hour` | `str` | ISO 8601 UTC timestamp of the signal hour |
 | `signal_count` | `int` | Number of signals returned |
-| `tier` | `str` | Your plan tier (`free`, `pro`, `max`) |
-| `next_update` | `str \| None` | When the next signal batch is expected |
+| `tier` | `str` | Plan tier (`free`, `pro`, `max`) |
+| `next_update` | `str \| None` | When the next signal batch was expected |
 | `signals` | `list[Signal]` | The signals |
 | `disclaimer` | `str` | Legal disclaimer |
 
@@ -101,7 +112,7 @@ except APIError as e:
 | `relative_volume` | `float \| None` | Volume vs. average |
 | `checked_at` | `str` | ISO 8601 timestamp |
 
-## Tier Comparison
+## Tiers (as offered)
 
 | Feature | Free | Pro | Max |
 |---------|------|-----|-----|
@@ -112,10 +123,6 @@ except APIError as e:
 | Historical lookback | — | — | Same-day by hour |
 | Daily API calls | 25 | 100 | 500 |
 
-## Links
+## License
 
-- [Website](https://irrationalsignals.com)
-- [Full API documentation](https://irrationalsignals.com/docs)
-- [Pricing](https://irrationalsignals.com/pricing)
-- [Dashboard & API keys](https://irrationalsignals.com/dashboard)
-- [Get a free API key](https://irrationalsignals.com/register)
+MIT. See `pyproject.toml`.
