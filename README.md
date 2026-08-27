@@ -99,9 +99,13 @@ except APIError as e:
 | `expected_return_pct` | `float` | All |
 | `exit_target` | `float` | All |
 | `primary_horizon` | `str` | All |
-| `stop_loss_armed` | `float \| None` | Max |
-| `stop_loss_hard` | `float \| None` | Max |
 | `horizon_end` | `str \| None` | Max |
+
+**exit_target** (float): Suggested exit price in USD. Computed as `entry_price × (1 + expected_return_pct)`. Intended as an execution reference; you were free to exit earlier or later based on your own risk tolerance.
+
+**expected_return_pct** (float): Expected return from entry to exit target, as a decimal (e.g. `0.008` = 0.8%). Derived from the signal type's historical forward-return distribution over the trailing 90 days, refreshed weekly. Values ranged from 0.3% to 1.5% for signal types with sufficient historical data; signal types with insufficient data defaulted to 0.5%.
+
+**horizon_end** (str | None, Max tier): Suggested exit time as ISO 8601. Typically `signal_time + 2h30m`, capped at 15:50 ET (market close − 10 min).
 
 ### `PreflightData` (Max tier only)
 
@@ -118,7 +122,7 @@ except APIError as e:
 |---------|------|-----|-----|
 | Signals per hour | 1 | 8 | Unlimited |
 | Market hours | 10 AM only | All hours | All hours |
-| Execution guidance | Basic | Basic | Full (+ stop losses) |
+| Execution guidance | Basic | Basic | Full (+ horizon end) |
 | Preflight data | — | — | Included |
 | Historical lookback | — | — | Same-day by hour |
 | Daily API calls | 25 | 100 | 500 |

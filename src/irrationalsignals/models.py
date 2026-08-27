@@ -12,11 +12,27 @@ class ExecutionGuidance:
 
     entry_price: float
     expected_return_pct: float
+    """Expected return from entry to exit target, as a decimal (0.008 = 0.8%).
+
+    Derived from the signal type's historical forward-return distribution:
+    average 2.5-hour (150-minute) forward paper return over the trailing
+    90 days, grouped by signal_name, refreshed weekly on the server.
+
+    Values are clipped to [0.003, 0.015] (0.3% - 1.5%). Signal types with
+    fewer than 30 historical samples in the rolling window fall through to
+    a 0.5% conservative default.
+    """
     exit_target: float
+    """Suggested exit price in USD.
+
+    Computed as ``entry_price * (1 + expected_return_pct)``.
+    See :attr:`expected_return_pct` for the source of the multiplier.
+    """
     primary_horizon: str
-    stop_loss_armed: Optional[float] = None   # Max tier only
-    stop_loss_hard: Optional[float] = None     # Max tier only
-    horizon_end: Optional[str] = None          # Max tier only — ISO 8601
+    horizon_end: Optional[str] = None
+    """Suggested exit time, ISO 8601. Typically ``signal_time + 2h30m``,
+    capped at 15:50 ET (market close − 10 min). Max tier only.
+    """
 
     @classmethod
     def from_dict(cls, data: dict | None) -> Optional[ExecutionGuidance]:
@@ -27,8 +43,6 @@ class ExecutionGuidance:
             expected_return_pct=data["expected_return_pct"],
             exit_target=data["exit_target"],
             primary_horizon=data["primary_horizon"],
-            stop_loss_armed=data.get("stop_loss_armed"),
-            stop_loss_hard=data.get("stop_loss_hard"),
             horizon_end=data.get("horizon_end"),
         )
 
